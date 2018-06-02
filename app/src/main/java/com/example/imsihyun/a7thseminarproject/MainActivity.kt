@@ -8,6 +8,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.View
+import android.view.animation.AnimationUtils
+import android.widget.RelativeLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -19,6 +21,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     // 2018.06.02 추가
     lateinit var swipeController: SwipeController
     lateinit var itemTouchListener: ItemTouchHelper
+
+    var isDisplayButtons : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +68,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
         })
 
+        main_float_add.setOnClickListener {
+            clickFloat()
+        }
 
     }
 
@@ -77,6 +84,59 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         intent.putExtra("name", name)
         intent.putExtra("profile", profile)
         startActivity(intent)
+
+    }
+
+    fun clickFloat() {
+
+        if(!isDisplayButtons) {
+            isDisplayButtons = true
+
+            val animation = AnimationUtils.loadAnimation(this,
+                    R.anim.float_button1_show)
+            main_float_add.setBackgroundResource(R.drawable.img1)
+            main_float_add.startAnimation(animation)
+
+            val layoutParam1 = main_float_c1.layoutParams as RelativeLayout.LayoutParams
+            layoutParam1.bottomMargin += (main_float_c1.height * 1.2).toInt()
+            val showC1 = AnimationUtils.loadAnimation(this,
+                    R.anim.float_button1_show)
+            main_float_c1.layoutParams = layoutParam1
+            main_float_c1.startAnimation(showC1)
+            main_float_c1.isClickable = true
+
+            val layoutParam2 = main_float_c2.layoutParams as RelativeLayout.LayoutParams
+            layoutParam2.bottomMargin += (main_float_c2.height * 2.4).toInt()
+            val showC2 = AnimationUtils.loadAnimation(this,
+                    R.anim.float_button1_show)
+            main_float_c2.layoutParams = layoutParam2
+            main_float_c2.startAnimation(showC2)
+            main_float_c2.isClickable = true
+
+        } else {
+            isDisplayButtons = false
+
+            val animation = AnimationUtils.loadAnimation(this,
+                    R.anim.float_button1_hide)
+            main_float_add.setBackgroundResource(R.drawable.img1)
+            main_float_add.startAnimation(animation)
+
+            val layoutParam1 = main_float_c1.layoutParams as RelativeLayout.LayoutParams
+            layoutParam1.bottomMargin -= (main_float_c1.height * 1.2).toInt()
+            val showC1 = AnimationUtils.loadAnimation(this,
+                    R.anim.float_button1_hide)
+            main_float_c1.layoutParams = layoutParam1
+            main_float_c1.startAnimation(showC1)
+            main_float_c1.isClickable = true
+
+            val layoutParam2 = main_float_c2.layoutParams as RelativeLayout.LayoutParams
+            layoutParam2.bottomMargin -= (main_float_c2.height * 2.4).toInt()
+            val showC2 = AnimationUtils.loadAnimation(this,
+                    R.anim.float_button1_hide)
+            main_float_c2.layoutParams = layoutParam2
+            main_float_c2.startAnimation(showC2)
+            main_float_c2.isClickable = true
+        }
 
     }
 }

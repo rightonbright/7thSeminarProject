@@ -22,6 +22,12 @@ class SwipeController() : ItemTouchHelper.Callback() {
 
     private var currentItemViewHolder: RecyclerView.ViewHolder? = null
 
+    private var buttonsActions: SwipeController? = null
+
+    constructor(buttonsActions: SwipeController) : this(){
+        this.buttonsActions = buttonsActions
+    }
+
     private val buttonWidth = 300f
 
     override fun convertToAbsoluteDirection(flags: Int, layoutDirection: Int): Int {
