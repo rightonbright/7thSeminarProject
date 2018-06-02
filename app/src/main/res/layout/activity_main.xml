@@ -18,8 +18,8 @@
         android:id="@+id/main_wrapper_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:background="#88000000"
-        android:orientation="horizontal"
         android:visibility="invisible" />
 
     <Button

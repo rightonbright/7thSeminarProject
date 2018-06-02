@@ -72,6 +72,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             clickFloat()
         }
 
+        main_float_c1.setOnClickListener {
+
+        }
+
+        main_float_c2.setOnClickListener {
+
+        }
+
+
+
     }
 
     override fun onClick(v: View?) {
@@ -91,6 +101,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         if(!isDisplayButtons) {
             isDisplayButtons = true
+
+            main_wrapper_layout.visibility = View.VISIBLE
+            main_wrapper_layout.setOnClickListener {
+                clickFloat()
+            }
 
             val animation = AnimationUtils.loadAnimation(this,
                     R.anim.float_button1_show)
@@ -115,6 +130,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         } else {
             isDisplayButtons = false
+
+            main_wrapper_layout.visibility = View.INVISIBLE
+            main_wrapper_layout.setOnClickListener {
+                clickFloat()
+            }
+
 
             val animation = AnimationUtils.loadAnimation(this,
                     R.anim.float_button1_hide)
