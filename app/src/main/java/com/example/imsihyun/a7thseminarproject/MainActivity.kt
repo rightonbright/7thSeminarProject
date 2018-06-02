@@ -1,27 +1,16 @@
 package com.example.imsihyun.a7thseminarproject
 
 import android.content.Intent
+import android.graphics.Canvas
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
-
-    override fun onClick(v: View?) {
-        val idx : Int = main_rv.getChildAdapterPosition(v)
-        val name : String = kakaoItems[idx].name
-        val profile : Int = kakaoItems[idx].profile
-
-
-        val intent : Intent = Intent(applicationContext, ChatActivity::class.java)
-        intent.putExtra("name", name)
-        intent.putExtra("profile", profile)
-        startActivity(intent)
-
-    }
 
 
     lateinit var kakaoItems : ArrayList<KakaoData>
@@ -69,6 +58,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         itemTouchListener = ItemTouchHelper(swipeController)
         itemTouchListener.attachToRecyclerView(main_rv)
 
+        main_rv.addItemDecoration(object : RecyclerView.ItemDecoration() {
+            override fun onDraw(c: Canvas?, parent: RecyclerView?, state: RecyclerView.State?) {
+                swipeController.onDraw(c!!)
+            }
+        })
+
+
+    }
+
+    override fun onClick(v: View?) {
+        val idx : Int = main_rv.getChildAdapterPosition(v)
+        val name : String = kakaoItems[idx].name
+        val profile : Int = kakaoItems[idx].profile
+
+
+        val intent : Intent = Intent(applicationContext, ChatActivity::class.java)
+        intent.putExtra("name", name)
+        intent.putExtra("profile", profile)
+        startActivity(intent)
 
     }
 }
